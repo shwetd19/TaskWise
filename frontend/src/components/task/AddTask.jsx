@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import ModalWrapper from "../ModalWrapper";
 import { Dialog } from "@headlessui/react";
 import Textbox from "../Textbox";
-import { useForm } from "react-hook-form";
 import SelectList from "../SelectList";
 import { BiImages } from "react-icons/bi";
 import Button from "../Button";
 import axios from "axios";
+import { useForm } from "react-hook-form"; // Import useForm from react-hook-form
+import UserList from "./UserList"; // Import UserList component
 
 const LISTS = ["todo", "in progress", "completed"]; // Changed to lowercase
 const PRIORIRY = ["high", "medium", "normal"]; // Changed to lowercase
@@ -16,33 +17,36 @@ const AddTask = ({ open, setOpen }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm(); // Initialize useForm hook
   const [stage, setStage] = useState(LISTS[0]);
   const [priority, setPriority] = useState(PRIORIRY[2]);
+  const [team, setTeam] = useState([]); // State for managing team members
+  const [files, setFiles] = useState([]); // State for managing uploaded files
 
   const submitHandler = async (data) => {
     try {
       const formData = {
         title: data.title,
-        stage: stage.toLowerCase(), // Convert to lowercase to match enum values
+        stage: stage.toLowerCase(),
         date: data.date,
-        priority: priority.toLowerCase(), // Convert to lowercase to match enum values
+        priority: priority.toLowerCase(),
+        team: team, // Include selected team members
+        files: files, // Include uploaded files
       };
-  
-      // Make a POST request to the backend
+
       const response = await axios.post("http://localhost:5000/tasks", formData);
-  
-      console.log(response.data); // Log the response from the server
-      setOpen(false); // Close the modal after successful submission
-      // You might want to update the state or refresh tasks after adding a new one
+
+      console.log(response.data);
+      setOpen(false);
     } catch (error) {
       console.error("Error creating task:", error);
-      // Handle error if submission fails
     }
   };
-  
+
   const handleSelect = (e) => {
     // handle file select
+    const fileList = Array.from(e.target.files);
+    setFiles(fileList);
   };
 
   return (
@@ -66,6 +70,8 @@ const AddTask = ({ open, setOpen }) => {
               register={register("title", { required: "Title is required" })}
               error={errors.title ? errors.title.message : ""}
             />
+
+            <UserList setTeam={setTeam} team={team} /> {/* Add UserList component */}
 
             <div className="flex gap-4">
               <SelectList

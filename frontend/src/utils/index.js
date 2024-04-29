@@ -24,15 +24,15 @@ export function dateFormatter(dateString) {
   return formattedDate;
 }
 
-export function getInitials(fullName) {
-  const names = fullName.split(" ");
+export const getInitials = (username) => {
+  if (!username) return ''; // Return an empty string if username is falsy
+  const initials = username
+    .split(' ')
+    .map((name) => name.charAt(0).toUpperCase())
+    .join('');
+  return initials;
+};
 
-  const initials = names.slice(0, 2).map((name) => name[0].toUpperCase());
-
-  const initialsStr = initials.join("");
-
-  return initialsStr;
-}
 
 export const PRIOTITYSTYELS = {
   high: "text-red-600",

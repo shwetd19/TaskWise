@@ -6,7 +6,7 @@ import { HiDuplicate } from "react-icons/hi";
 import { MdAdd, MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Menu, Transition } from "@headlessui/react";
-import AddTask from "./AddTask";
+import EditTask from "./EditTask";
 import AddSubTask from "./AddSubTask";
 import ConfirmatioDialog from "../Dialogs";
 
@@ -132,7 +132,7 @@ const TaskDialog = ({ task }) => {
         </Menu>
       </div>
 
-      <AddTask
+      <EditTask
         open={openEdit}
         setOpen={setOpenEdit}
         task={task}
