@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const fs = require("fs");
 require("dotenv").config(); // To load environment variables from .env file
 
 const app = express();
@@ -14,7 +15,16 @@ const uri = process.env.MONGO;
 
 // Connect to MongoDB Atlas using Mongoose
 mongoose.connect(uri, {
-  // Removed deprecated options
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  ssl: true,
+  sslValidate: true,
+  // If you have a CA certificate, use it; otherwise, you can omit this
+  // sslCA: [fs.readFileSync('/path/to/ca.pem')] 
+}).then(() => {
+  console.log("Connected to MongoDB");
+}).catch((error) => {
+  console.error("MongoDB connection error:", error);
 });
 
 // Allow requests from specific origins with credentials
@@ -29,17 +39,6 @@ const corsOptions = {
 
 // Apply CORS middleware
 app.use(cors(corsOptions));
-
-const db = mongoose.connection;
-
-// Connection event handlers
-db.once("open", () => {
-  console.log("Connected to MongoDB");
-});
-
-db.on("error", (error) => {
-  console.error("MongoDB connection error:", error);
-});
 
 // Middleware
 app.use(express.json());
