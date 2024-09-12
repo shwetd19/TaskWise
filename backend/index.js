@@ -15,7 +15,7 @@ const uri = process.env.MONGO;
 // Connect to MongoDB Atlas using Mongoose
 mongoose.connect(uri, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+  // Removed deprecated options
 });
 
 // Allow requests from specific origins with credentials
