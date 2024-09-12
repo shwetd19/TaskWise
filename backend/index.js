@@ -19,7 +19,7 @@ mongoose.connect(uri, {
 });
 
 // Allow requests from specific origins with credentials
-const allowedOrigins = ['https://task-wise-app.vercel.app/']; // Add other origins as needed
+const allowedOrigins = ['https://taskwise-app.netlify.app']; // Add other origins as needed
 
 // CORS middleware configuration
 const corsOptions = {
@@ -49,5 +49,5 @@ app.use(taskRouter);
 
 // Start Express server
 app.listen(port, () => {
-  console.log("Server is up on the port: " + port);
+  console.log("Server is up on port: " + port);
 });
