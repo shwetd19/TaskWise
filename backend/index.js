@@ -14,7 +14,6 @@ const uri = process.env.MONGO;
 
 // Connect to MongoDB Atlas using Mongoose
 mongoose.connect(uri, {
-  useNewUrlParser: true,
   // Removed deprecated options
 });
 
