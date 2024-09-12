@@ -28,7 +28,7 @@ mongoose.connect(uri, {
 });
 
 // Allow requests from specific origins with credentials
-const allowedOrigins = ['https://task-wise-app.vercel.app']; // Add other origins as needed
+const allowedOrigins = ['https://taskwise-m8vj.onrender.com']; // Add other origins as needed
 
 // CORS middleware configuration
 const corsOptions = {
