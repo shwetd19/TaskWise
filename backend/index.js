@@ -17,8 +17,8 @@ const uri = process.env.MONGO;
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  ssl: true,
-  sslValidate: true,
+  ssl: true, // Keep this if you want to use SSL/TLS
+  // sslValidate: true, // Remove this line
   // If you have a CA certificate, use it; otherwise, you can omit this
   // sslCA: [fs.readFileSync('/path/to/ca.pem')] 
 }).then(() => {
