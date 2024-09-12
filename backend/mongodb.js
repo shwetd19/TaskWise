@@ -1,15 +1,14 @@
-
-
 const { MongoClient } = require('mongodb');
 const url = 'mongodb://localhost:27017';
 const databaseName = 'happy';
-const client = new MongoClient(url);
+const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 async function getData() {
+    let db;
     try {
         // Connect to the database
-        const result = await client.connect();
-        const db = result.db(databaseName);
+        await client.connect();
+        db = client.db(databaseName);
         const collection = db.collection('task-manager');
 
         // Fetch and log existing data
@@ -27,10 +26,12 @@ async function getData() {
         // Fetch and log data after insertion
         data = await collection.find({}).toArray();
         console.log('Data after insertion:', data);
+    } catch (error) {
+        console.error('Error:', error);
     } finally {
         // Close the connection in the finally block to ensure it's closed regardless of success or failure
         await client.close();
     }
 }
 
-getData().catch(error => console.error('Error:', error));
+getData();
