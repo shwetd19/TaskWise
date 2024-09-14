@@ -28,7 +28,7 @@ mongoose.connect(uri, {
 });
 
 // Allow requests from specific origins with credentials
-const allowedOrigins = ['https://taskwise-app.netlify.app']; // Add other origins as needed
+const allowedOrigins = ['http://localhost:5173']; // Add other origins as needed
 
 // CORS middleware configuration
 const corsOptions = {

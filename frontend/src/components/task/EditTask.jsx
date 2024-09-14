@@ -38,7 +38,7 @@ const EditTask = ({ open, setOpen, task, onUpdate }) => {
       };
 
       const response = await axios.patch(
-        `https://taskwise-m8vj.onrender.com/tasks/${task._id}`,
+        `http://localhost:5000/tasks/${task._id}`,
         formData
       );
 

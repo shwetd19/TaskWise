@@ -22,7 +22,7 @@ const Users = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("https://taskwise-m8vj.onrender.com/users");
+      const response = await axios.get("http://localhost:5000/users");
       setUsers(response.data); // Set fetched users to state
     } catch (error) {
       console.error("Error fetching users:", error);

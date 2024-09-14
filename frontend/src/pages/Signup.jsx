@@ -24,7 +24,7 @@ const Signup = () => {
   const submitHandler = async (formData) => {
     try {
       const response = await axios.post(
-        "https://taskwise-m8vj.onrender.com/signup",
+        "http://localhost:5000/signup",
         formData
       );
 
